@@ -1,0 +1,60 @@
+<div style="text-align: center">
+  <div *ngIf="isclicked">
+    <h3>data After encryption is:-{{ enc }}</h3>
+    <h3>data After Decryption is:-{{ dec }}</h3>
+  </div>
+</div>
+
+<div>
+  <div>
+    <mat-card class="bgcolor" fxLayout="column" fxLayoutAlign="center center">
+      <form
+        [formGroup]="categoryFormGroup"
+        (ngSubmit)="createCategory()"
+        autocomplete="off"
+      >
+        <div>
+          <p>
+            <label class="login_header">Category</label>
+          </p>
+        </div>
+
+        <div>
+          <mat-form-field appearance="standard">
+            <mat-label>Category</mat-label>
+            <input
+              matInput
+              formControlName="category_name"
+              placeholder="Category"
+            />
+            <mat-hint>Category required</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="standard">
+            <mat-label>Status</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="status"
+              placeholder="status"
+            />
+            <mat-hint>Status required</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button
+            [disabled]="categoryFormGroup.invalid"
+            mat-raised-button
+            type="submit"
+            color="primary"
+          >
+            Send
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

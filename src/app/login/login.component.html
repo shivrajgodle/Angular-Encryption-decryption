@@ -1,0 +1,71 @@
+<div style="text-align: center">
+  <div *ngIf="isclicked">
+    <h3>data After encryption is:-{{ enc }}</h3>
+    <h3>data After Decryption is:-{{ dec }}</h3>
+  </div>
+</div>
+
+<div>
+  <div>
+    <mat-card class="bgcolor" fxLayout="column" fxLayoutAlign="center center">
+      <form [formGroup]="loginFormGroup" (ngSubmit)="get()" autocomplete="off">
+        <div>
+          <p>
+            <label class="login_header">Login</label>
+          </p>
+        </div>
+
+        <div>
+          <mat-form-field appearance="standard">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" placeholder="Username" />
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-hint>Username required</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="standard">
+            <mat-label>Password</mat-label>
+            <input
+              [type]="fieldTextType ? 'text' : 'password'"
+              matInput
+              type="password"
+              formControlName="password"
+              placeholder="password"
+            />
+
+            <mat-icon
+              matSuffix
+              class="material-icons"
+              *ngIf="!fieldTextType"
+              (click)="toggleFieldTextType()"
+              >visibility_off</mat-icon
+            >
+
+            <mat-icon
+              matSuffix
+              class="material-icons"
+              *ngIf="fieldTextType"
+              (click)="toggleFieldTextType()"
+              >visibility</mat-icon
+            >
+
+            <mat-hint>Password required</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <button
+            [disabled]="loginFormGroup.invalid"
+            mat-raised-button
+            type="submit"
+            color="primary"
+          >
+            Sign In
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>
