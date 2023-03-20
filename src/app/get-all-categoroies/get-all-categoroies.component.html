@@ -1,0 +1,35 @@
+<div style="text-align: center">
+  <div *ngIf="isclicked">
+    <h3>data After encryption is:-{{ enc }}</h3>
+    <h3>data After Decryption is:-{{ dec | json }}</h3>
+  </div>
+</div>
+
+<div>
+  <div>
+    <mat-card class="bgcolor" fxLayout="column" fxLayoutAlign="center center">
+      <form
+        [formGroup]="getcategoryFormGroup"
+        (ngSubmit)="getAllCategory()"
+        autocomplete="off"
+      >
+        <div>
+          <p>
+            <label class="login_header">Get All Categories</label>
+          </p>
+        </div>
+
+        <div>
+          <button
+            [disabled]="getcategoryFormGroup.invalid"
+            mat-raised-button
+            type="submit"
+            color="primary"
+          >
+            Get All Categories
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import * as CryptoJS from 'crypto-js';
 import { AESEncryptDecryptService } from '../aesencrypt-decrypt.service';
 import { CategoryService } from '../category.service';
-import { Login } from '../model/login';
 import { DataRequest } from '../model/request';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css'],
+  selector: 'app-get-category',
+  templateUrl: './get-category.component.html',
+  styleUrls: ['./get-category.component.css'],
 })
-export class CategoryComponent implements OnInit {
+export class GetCategoryComponent implements OnInit {
   Categoryresponse: any;
   data = '{"category_id":7}';
 
@@ -22,7 +20,7 @@ export class CategoryComponent implements OnInit {
   formBuilder: any;
 
   categoryData!: string;
-  categoryFormGroup!: FormGroup;
+  getcategoryFormGroup!: FormGroup;
   fieldTextType!: boolean;
 
   decryptedText: any;
@@ -34,27 +32,22 @@ export class CategoryComponent implements OnInit {
     this.initLoginForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const dec = 'L5xUhHZgC7E15CU7RNu/8tWylmUTpcn9/TRl7Mds1Ig=';
+
+    let str = this._AESEncryptDecryptService.decrypt(dec);
+    console.log('str is:-' + str);
+  }
 
   initLoginForm() {
-    this.categoryFormGroup = new FormGroup({
-      category_name: new FormControl(''),
-      status: new FormControl(''),
+    this.getcategoryFormGroup = new FormGroup({
+      category_id: new FormControl(''),
     });
   }
 
-  userLogin() {
-    this.categoryData = this.categoryFormGroup.value;
-    console.log('Login data:-' + this.categoryData);
-  }
-
-  toggleFieldTextType() {
-    this.fieldTextType = !this.fieldTextType;
-  }
-
-  createCategory() {
-    this.categoryData = this.categoryFormGroup.value;
-    console.log('Login data:-' + this.categoryData);
+  getCategory() {
+    this.categoryData = this.getcategoryFormGroup.value;
+    console.log('get category data:-' + this.categoryData);
 
     this.isclicked = true;
 
@@ -63,16 +56,15 @@ export class CategoryComponent implements OnInit {
     );
     console.log('encrypted text is:-', encryptedText);
 
-    this.enc = encryptedText;
+    // this.enc = encryptedText;
 
-    this._categoryService.createCategory(this.enc).subscribe(
-      (data: any) => {
+    this._categoryService.getCategory(encryptedText).subscribe(
+      (data: string) => {
         this.Categoryresponse = data;
-        console.log('data is in category ts:-', data);
-        console.log('Categoryresponse is:-' + this.Categoryresponse);
+        console.log('data is in get category ts:-', data);
+        console.log('Categoryresponse is :-', this.Categoryresponse);
 
         let str = this._AESEncryptDecryptService.decrypt(data);
-        console.log('str is:-' + str);
         this.dec = str;
       },
       (error) => {

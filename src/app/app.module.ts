@@ -14,11 +14,17 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GetCategoryComponent } from './get-category/get-category.component';
+import { GetAllCategoroiesComponent } from './get-all-categoroies/get-all-categoroies.component';
+import { DeleteCategoryComponent } from './delete-category/delete-category.component';
 @NgModule({
   declarations: [
     AppComponent,
     CategoryComponent,
-    LoginComponent
+    LoginComponent,
+    GetCategoryComponent,
+    GetAllCategoroiesComponent,
+    DeleteCategoryComponent
   ],
   imports: [
     BrowserModule,
